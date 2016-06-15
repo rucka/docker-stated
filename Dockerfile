@@ -1,17 +1,14 @@
 FROM mhart/alpine-node:6.2.1
-#FROM debian:latest
 MAINTAINER Gianluca Carucci <rucka@tiscalinet.it>
-#ENV DEBIAN_FRONTEND noninteractive
-ENV STATSD_VERSION v0.8.0
-#RUN apt-get --yes update && \
-#    apt-get --yes dist-upgrade
-#RUN apt-get --yes install curl && \
-#    curl -sL https://deb.nodesource.com/setup | bash - && \
-#    apt-get --yes install nodejs && \
-#    apt-get --yes purge curl
-ADD https://github.com/etsy/statsd/archive/${STATSD_VERSION}.tar.gz /tmp/statsd.tar.gz
-RUN mkdir -p /src/statsd && tar -xzvf /tmp/statsd.tar.gz -C /src/statsd && \
+
+ENV STATSD_VERSION 0.8.0
+
+ADD https://github.com/etsy/statsd/archive/v${STATSD_VERSION}.tar.gz /tmp/statsd.tar.gz
+RUN mkdir -p /src && tar -xzvf /tmp/statsd.tar.gz -C /src && \
     rm /tmp/statsd.tar.gz
+RUN mv /src/statsd-${STATSD_VERSION} /src/statsd
+
 COPY config.js /etc/statsd/config.js
+
 EXPOSE  8125/udp
 CMD ["node", "/src/statsd/stats.js", "/etc/statsd/config.js"]

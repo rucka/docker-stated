@@ -4,7 +4,7 @@ statsd packaged for docker
 
 ## Run statsd Container
 
-    docker run -d -p 8125:8125 --name statsd rucka/statsd
+    docker run -d -p 8125:8125 --name statsd rucka/docker-statsd:v0.8.0
 
 Test statsd:
 

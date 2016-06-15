@@ -1,7 +1,7 @@
 FROM debian:latest
-MAINTAINER Johannes Mitlmeier <dev.jojomi@yahoo.com>
+MAINTAINER Gianluca Carucci <rucka@tiscalinet.it>
 ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get --yes update && \ 
+RUN apt-get --yes update && \
     apt-get --yes dist-upgrade
 RUN apt-get --yes install curl && \
     curl -sL https://deb.nodesource.com/setup | bash - && \
